@@ -433,11 +433,11 @@ function get_infoWindow_string (country) {
         if (record["country"] === country) {
             var color = wingColorCoding[record["political_wing"]];
             result += '<p style="font-weight: bold; font-size: 18px; text-align: right;">';
-            result += '<span style="color:'+ color + '";>' + record["party_name_eng"] + '</span>';
+            result += '<span style="color:'+ color + '";>' + record["party_name_eng"] + '&nbsp;&nbsp;</span>';
 
             var vote_rate = record["vote_rate"];
             if (parseInt(vote_rate) >= 10.0) {
-                result += record["vote_rate"] + "&nbsp;";
+                result += record["vote_rate"];
             } else {
                 result += "<span style='color:white'>0</span>"+record["vote_rate"];
                 // Insert a space to align colons;
