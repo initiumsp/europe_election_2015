@@ -437,7 +437,7 @@ function get_infoWindow_string (country) {
 
             var vote_rate = record["vote_rate"];
             if (parseInt(vote_rate) >= 10.0) {
-                result += record["vote_rate"];
+                result += record["vote_rate"] + "&nbsp;";
             } else {
                 result += "&nbsp;&nbsp;"+record["vote_rate"];
                 // Insert a space to align colons;
