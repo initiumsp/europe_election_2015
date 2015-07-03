@@ -100,7 +100,7 @@ var electionData = [
         "election_type": "parlimentary",
         "party_name_eng": "SYRIZA",
         "party_name_chi": "",
-        "political_wing": "far-left",
+        "political_wing": "far_left",
         "vote_rate": "36.30%"
     },
     {
@@ -118,7 +118,7 @@ var electionData = [
         "election_type": "parlimentary",
         "party_name_eng": "Golden Dawn",
         "party_name_chi": "",
-        "political_wing": "far-right",
+        "political_wing": "far_right",
         "vote_rate": "6.30%"
     },
     {
@@ -439,8 +439,8 @@ function get_infoWindow_string (country) {
             if (parseInt(vote_rate) >= 10.0) {
                 result += record["vote_rate"];
             } else {
-                result += "<span style='color:white'>&nbsp;</span>"+record["vote_rate"];
                 // Insert a space to align colons;
+                result += "<span style='color:white'>&nbsp;</span>"+record["vote_rate"];
             }
             result += '</p>';
             console.log(result);
