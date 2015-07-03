@@ -1,0 +1,41 @@
+month,country,election_type,party_name_eng,party_name_chi,political_wing,vote_rate
+1,Crotia,presidential,Croatian Democratic Union,民主联盟,middle_right,50.74%
+1,Crotia,presidential,Social Democratic Party of Croatia (SDP),社会民主党,middle_left,49.26%
+1,Italy,presidential,Democratic Party,民主党,middle_left,65.91%
+1,Italy,presidential,Five Star Movement,五星运动,,
+2,Greek,parlimentary,SYRIZA,极左翼政党联盟,far-left,36.30%
+2,Greek,parlimentary,New Democracy,新民主党,middle_right,27.80%
+2,Greek,parlimentary,Golden Dawn,金色黎明党,far-right,6.30%
+2,Greek,parlimentary,The River,河党,middle-left,6.10%
+3,Estonia,parlimentary,Estonian Reform Party,改革党,middle-right,27.70%
+3,Estonia,parlimentary,Estonian Centre Party,中间党,middle-right,24.80%
+3,Estonia,parlimentary,Social Democratic Party,社会民主党,middle-left,15.20%
+3,Estonia,parlimentary,Pro Patria and Res Publica Union,,middle_right,13.70%
+3,France,local,Union for a Popular Movement (UMP),人民运动联盟党（现改名为“共和党”）,middle_right,29.00%
+3,France,local,National Front,国民阵线党,far_right,25.00%
+3,France,local,Socialist Party,社会主义党,middle_left,13.30%
+4,Finland,parlimentary,Centre Party,中间党,middle,21.10%
+4,Finland,parlimentary,Finns Party,芬兰人党,far_right,17.70%
+4,Finland,parlimentary,National Coalition,国家联盟党,middle_right,18.20%
+4,Finland,parlimentary,Social Democratic Party,社会民主党,middle_left,16.50%
+4,Andorra,parlimentary,Democrats for Andorra,民主党,middle_right,37.03%
+4,Andorra,parlimentary,Liberal Party of Andorra,自由党,middle_right,27.68%
+4,Andorra,parlimentary,"Social Democratic, Green, Citizens' Initiative and independent candidates",社会民主党、绿党等联盟,middle_left,23.53%
+5,UK,parlimentary,Conservtive,保守党,middle_right,36.90%
+5,UK,parlimentary,Labour,工党,middle_left,30.40%
+5,UK,parlimentary,UKIP,独立党,far_right,12.60%
+5,UK,parlimentary,Liberal Democrats,自由民主党,middle,7.90%
+5,UK,parlimentary,SNP,苏格兰民族党,middle_left,4.70%
+5,Poland,presidential,Law and Justice (PiS),法律与公正党,middle_right,51.55%
+5,Poland,presidential,Civic Platform,公民平台,middle_right,48.45%
+5,Spain,local,People's Party,人民党,middle_right,29.20%
+5,Spain,local,Spanish Socialist Workers' Party (PSOE),社会主义工人党,middle_left,24.10%
+5,Spain,local,Podemos,“我们可以”党,far_left,13.50%
+6,Turkey,parlimentary,Justice and Development Party,正义与发展党,middle_right,40.87%
+6,Turkey,parlimentary,Republican People's Party,共和国人民党,middle_left,24.95%
+6,Turkey,parlimentary,Nationalist Movement Party,国家主义运动党,far_right,16.29%
+6,Turkey,parlimentary,Peoples' Democratic Party,人民民主党,middle_left,13.12%
+6,Denmark,parlimentary,Social Democrats,社会民主党,middle_left,26.30%
+6,Denmark,parlimentary,Danish People's Party,丹麦人民党,far_right,21.10%
+6,Denmark,parlimentary,Venstre,“左”党,middle_right,19.50%
+6,Denmark,parlimentary,Red–Green Alliance,红绿联合党,far_left,7.80%
