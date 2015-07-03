@@ -35,11 +35,11 @@ var baseColorData = {
 };
 
 var wingColorCoding = {
-    'far_right'   :'#00F',
-    'middle_right':'#008',
+    'far_right'   :'#008',
+    'middle_right':'#00F',
     'middle'      :'#0F0',
-    'middle_left' :'#800',
-    'far_left'    :'#F00',
+    'middle_left' :'#F00',
+    'far_left'    :'#800',
 };
 
 var capitalCoordinate = {
@@ -472,6 +472,10 @@ function initialize() {
         zoom: 5,
         center: {lat: 50, lng: 15}
     });
+
+    //Add legend
+    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(
+        document.getElementById('legend'));
 
     for (i=0;i<country_by_order.length;i++) {
         var country = country_by_order[i];
