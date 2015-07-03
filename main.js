@@ -260,7 +260,7 @@ var electionData = [
         "month": 5,
         "country": "UK",
         "election_type": "parlimentary",
-        "party_name_eng": "Conservtive",
+        "party_name_eng": "Conservative",
         "party_name_chi": "",
         "political_wing": "middle_right",
         "vote_rate": "36.90%"
