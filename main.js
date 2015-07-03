@@ -439,7 +439,7 @@ function get_infoWindow_string (country) {
             if (parseInt(vote_rate) >= 10.0) {
                 result += record["vote_rate"];
             } else {
-                result += "<span style='color:white'>0</span>"+record["vote_rate"];
+                result += "<span style='color:white'>&nbsp;</span>"+record["vote_rate"];
                 // Insert a space to align colons;
             }
             result += '</p>';
