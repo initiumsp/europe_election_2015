@@ -6,6 +6,16 @@ var layers = [];
 var i = 0;
 var lastInfoWindow = null;
 
+var initial_zoom = 5;
+var initial_lat = 50;
+var initial_lng = 15;
+
+if (window.innerWidth < 1024) {
+    initial_zoom = 4;
+    initial_lat = 50;
+    initial_lng = 15;
+}
+
 var countryList = [
     "Croatia",
     "Italy"  ,
@@ -39,7 +49,7 @@ var baseColorData = {
 var wingColorCoding = {
     'far_right'   :'#008',
     'middle_right':'#00F',
-    'middle'      :'#0F0',
+    'middle'      :'#060',
     'middle_left' :'#F00',
     'far_left'    :'#800'
 };
@@ -467,11 +477,11 @@ function show_infoWindow (country) {
 }
 
 function initialize() {
-    // Create a simple map.
     'use strict';
     map = new google.maps.Map(document.getElementById('map-canvas'), {
-        zoom: 5,
-        center: {lat: 50, lng: 15}
+        zoom: initial_zoom,
+        center: {lat: initial_lat,
+                 lng: initial_lng}
     });
 
     //Add legend
