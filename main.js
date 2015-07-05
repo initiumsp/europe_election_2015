@@ -1,10 +1,12 @@
+/*global google */
+
 var map;
 var infoWindows = [];
 var layers = [];
 var i = 0;
-var last_infoWindow = null;
+var lastInfoWindow = null;
 
-var country_by_order = [
+var countryList = [
     "Croatia",
     "Italy"  ,
     "Greece" ,
@@ -16,7 +18,7 @@ var country_by_order = [
     "Poland" ,
     "Spain"  ,
     "Turkey" ,
-    "Denmark",
+    "Denmark"
 ];
 
 var baseColorData = {
@@ -31,7 +33,7 @@ var baseColorData = {
     "Poland" :"middle_right",
     "Spain"  :"middle_right",
     "Turkey" :"middle_right",
-    "Denmark":"middle_left",
+    "Denmark":"middle_left"
 };
 
 var wingColorCoding = {
@@ -39,7 +41,7 @@ var wingColorCoding = {
     'middle_right':'#00F',
     'middle'      :'#0F0',
     'middle_left' :'#F00',
-    'far_left'    :'#800',
+    'far_left'    :'#800'
 };
 
 var capitalCoordinate = {
@@ -97,7 +99,7 @@ var electionData = [
     {
         "month": 2,
         "country": "Greece",
-        "election_type": "parlimentary",
+        "election_type": "parliamentary",
         "party_name_eng": "SYRIZA",
         "party_name_chi": "",
         "political_wing": "far_left",
@@ -106,7 +108,7 @@ var electionData = [
     {
         "month": 2,
         "country": "Greece",
-        "election_type": "parlimentary",
+        "election_type": "parliamentary",
         "party_name_eng": "New Democracy",
         "party_name_chi": "",
         "political_wing": "middle_right",
@@ -115,7 +117,7 @@ var electionData = [
     {
         "month": 2,
         "country": "Greece",
-        "election_type": "parlimentary",
+        "election_type": "parliamentary",
         "party_name_eng": "Golden Dawn",
         "party_name_chi": "",
         "political_wing": "far_right",
@@ -124,7 +126,7 @@ var electionData = [
     {
         "month": 2,
         "country": "Greece",
-        "election_type": "parlimentary",
+        "election_type": "parliamentary",
         "party_name_eng": "The River",
         "party_name_chi": "",
         "political_wing": "middle_left",
@@ -133,7 +135,7 @@ var electionData = [
     {
         "month": 3,
         "country": "Estonia",
-        "election_type": "parlimentary",
+        "election_type": "parliamentary",
         "party_name_eng": "Estonian Reform Party",
         "party_name_chi": "",
         "political_wing": "middle_right",
@@ -142,7 +144,7 @@ var electionData = [
     {
         "month": 3,
         "country": "Estonia",
-        "election_type": "parlimentary",
+        "election_type": "parliamentary",
         "party_name_eng": "Estonian Centre Party",
         "party_name_chi": "",
         "political_wing": "middle_right",
@@ -151,7 +153,7 @@ var electionData = [
     {
         "month": 3,
         "country": "Estonia",
-        "election_type": "parlimentary",
+        "election_type": "parliamentary",
         "party_name_eng": "Social Democratic Party",
         "party_name_chi": "",
         "political_wing": "middle_left",
@@ -160,7 +162,7 @@ var electionData = [
     {
         "month": 3,
         "country": "Estonia",
-        "election_type": "parlimentary",
+        "election_type": "parliamentary",
         "party_name_eng": "Pro Patria and Res Publica Union",
         "party_name_chi": "",
         "political_wing": "middle_right",
@@ -196,7 +198,7 @@ var electionData = [
     {
         "month": 4,
         "country": "Finland",
-        "election_type": "parlimentary",
+        "election_type": "parliamentary",
         "party_name_eng": "Centre Party",
         "party_name_chi": "",
         "political_wing": "middle",
@@ -205,7 +207,7 @@ var electionData = [
     {
         "month": 4,
         "country": "Finland",
-        "election_type": "parlimentary",
+        "election_type": "parliamentary",
         "party_name_eng": "Finns Party",
         "party_name_chi": "",
         "political_wing": "far_right",
@@ -214,7 +216,7 @@ var electionData = [
     {
         "month": 4,
         "country": "Finland",
-        "election_type": "parlimentary",
+        "election_type": "parliamentary",
         "party_name_eng": "National Coalition",
         "party_name_chi": "",
         "political_wing": "middle_right",
@@ -223,7 +225,7 @@ var electionData = [
     {
         "month": 4,
         "country": "Finland",
-        "election_type": "parlimentary",
+        "election_type": "parliamentary",
         "party_name_eng": "Social Democratic Party",
         "party_name_chi": "",
         "political_wing": "middle_left",
@@ -232,7 +234,7 @@ var electionData = [
     {
         "month": 4,
         "country": "Andorra",
-        "election_type": "parlimentary",
+        "election_type": "parliamentary",
         "party_name_eng": "Democrats for Andorra",
         "party_name_chi": "",
         "political_wing": "middle_right",
@@ -241,7 +243,7 @@ var electionData = [
     {
         "month": 4,
         "country": "Andorra",
-        "election_type": "parlimentary",
+        "election_type": "parliamentary",
         "party_name_eng": "Liberal Party of Andorra",
         "party_name_chi": "",
         "political_wing": "middle_right",
@@ -250,7 +252,7 @@ var electionData = [
     {
         "month": 4,
         "country": "Andorra",
-        "election_type": "parlimentary",
+        "election_type": "parliamentary",
         "party_name_eng": "Social Democratic, Green, Citizens' Initiative and independent candidates",
         "party_name_chi": "",
         "political_wing": "middle_left",
@@ -259,7 +261,7 @@ var electionData = [
     {
         "month": 5,
         "country": "UK",
-        "election_type": "parlimentary",
+        "election_type": "parliamentary",
         "party_name_eng": "Conservative",
         "party_name_chi": "",
         "political_wing": "middle_right",
@@ -268,7 +270,7 @@ var electionData = [
     {
         "month": 5,
         "country": "UK",
-        "election_type": "parlimentary",
+        "election_type": "parliamentary",
         "party_name_eng": "Labour",
         "party_name_chi": "",
         "political_wing": "middle_left",
@@ -277,7 +279,7 @@ var electionData = [
     {
         "month": 5,
         "country": "UK",
-        "election_type": "parlimentary",
+        "election_type": "parliamentary",
         "party_name_eng": "UKIP",
         "party_name_chi": "",
         "political_wing": "far_right",
@@ -286,7 +288,7 @@ var electionData = [
     {
         "month": 5,
         "country": "UK",
-        "election_type": "parlimentary",
+        "election_type": "parliamentary",
         "party_name_eng": "Liberal Democrats",
         "party_name_chi": "",
         "political_wing": "middle",
@@ -295,7 +297,7 @@ var electionData = [
     {
         "month": 5,
         "country": "UK",
-        "election_type": "parlimentary",
+        "election_type": "parliamentary",
         "party_name_eng": "SNP",
         "party_name_chi": "",
         "political_wing": "middle_left",
@@ -349,7 +351,7 @@ var electionData = [
     {
         "month": 6,
         "country": "Turkey",
-        "election_type": "parlimentary",
+        "election_type": "parliamentary",
         "party_name_eng": "Justice and Development Party",
         "party_name_chi": "",
         "political_wing": "middle_right",
@@ -358,7 +360,7 @@ var electionData = [
     {
         "month": 6,
         "country": "Turkey",
-        "election_type": "parlimentary",
+        "election_type": "parliamentary",
         "party_name_eng": "Republican People's Party",
         "party_name_chi": "",
         "political_wing": "middle_left",
@@ -367,7 +369,7 @@ var electionData = [
     {
         "month": 6,
         "country": "Turkey",
-        "election_type": "parlimentary",
+        "election_type": "parliamentary",
         "party_name_eng": "Nationalist Movement Party",
         "party_name_chi": "",
         "political_wing": "far_right",
@@ -376,7 +378,7 @@ var electionData = [
     {
         "month": 6,
         "country": "Turkey",
-        "election_type": "parlimentary",
+        "election_type": "parliamentary",
         "party_name_eng": "Peoples' Democratic Party",
         "party_name_chi": "",
         "political_wing": "middle_left",
@@ -385,7 +387,7 @@ var electionData = [
     {
         "month": 6,
         "country": "Denmark",
-        "election_type": "parlimentary",
+        "election_type": "parliamentary",
         "party_name_eng": "Social Democrats",
         "party_name_chi": "",
         "political_wing": "middle_left",
@@ -394,7 +396,7 @@ var electionData = [
     {
         "month": 6,
         "country": "Denmark",
-        "election_type": "parlimentary",
+        "election_type": "parliamentary",
         "party_name_eng": "Danish People's Party",
         "party_name_chi": "",
         "political_wing": "far_right",
@@ -403,7 +405,7 @@ var electionData = [
     {
         "month": 6,
         "country": "Denmark",
-        "election_type": "parlimentary",
+        "election_type": "parliamentary",
         "party_name_eng": "Venstre",
         "party_name_chi": "",
         "political_wing": "middle_right",
@@ -412,7 +414,7 @@ var electionData = [
     {
         "month": 6,
         "country": "Denmark",
-        "election_type": "parlimentary",
+        "election_type": "parliamentary",
         "party_name_eng": "Red–Green Alliance",
         "party_name_chi": "",
         "political_wing": "far_left",
@@ -430,20 +432,19 @@ function get_infoWindow_string (country) {
     //Add parties and their vote rates
     for (var x=0;x<electionData.length;x++) {
         var record = electionData[x];
-        if (record["country"] === country) {
-            var color = wingColorCoding[record["political_wing"]];
+        if (record.country === country) {
+            var color = wingColorCoding[record.political_wing];
             result += '<p style="font-weight: bold; font-size: 18px; text-align: right;">';
             result += '<span style="color:'+ color + '";>' + record["party_name_eng"] + '&nbsp;&nbsp;</span>';
 
-            var vote_rate = record["vote_rate"];
+            var vote_rate = record.vote_rate;
             if (parseInt(vote_rate) >= 10.0) {
-                result += record["vote_rate"];
+                result += record.vote_rate;
             } else {
                 // Insert a space to align colons;
                 result += "<span style='color:white'>&nbsp;</span>"+record["vote_rate"];
             }
             result += '</p>';
-            console.log(result);
         }
     }
     return result;
@@ -452,17 +453,17 @@ function get_infoWindow_string (country) {
 function show_infoWindow (country) {
     'use strict';
     return function () {
-        if (last_infoWindow !== null) {
-            last_infoWindow.close();
+        if (lastInfoWindow !== null) {
+            lastInfoWindow.close();
         }
-        for (var rank = 0; rank < country_by_order.length; rank++) {
-            if (country_by_order[rank] === country) {
+        for (var rank = 0; rank < countryList.length; rank++) {
+            if (countryList[rank] === country) {
                 break;
             }
         }
         infoWindows[rank].open(map, layers[rank]);
-        last_infoWindow = infoWindows[rank];
-    }
+        lastInfoWindow = infoWindows[rank];
+    };
 }
 
 function initialize() {
@@ -477,8 +478,8 @@ function initialize() {
     map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(
         document.getElementById('legend'));
 
-    for (i=0;i<country_by_order.length;i++) {
-        var country = country_by_order[i];
+    for (i=0;i<countryList.length;i++) {
+        var country = countryList[i];
         var wing = baseColorData[country];
         var color = wingColorCoding[wing];
 
@@ -486,14 +487,14 @@ function initialize() {
         layers[i].loadGeoJson('./json/'+country+'.json');
         layers[i].setStyle({
             strokeColor: color,
-            fillColor: color,
+            fillColor: color
         });
 
         var contentString = get_infoWindow_string(country);
         var infoWindowPosition = capitalCoordinate[country];
         infoWindows[i] = new google.maps.InfoWindow({
             content: contentString,
-            position: infoWindowPosition,
+            position: infoWindowPosition
         });
 
         google.maps.event.addListener(layers[i], 'click', show_infoWindow(country));
