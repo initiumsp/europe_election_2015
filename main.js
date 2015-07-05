@@ -66,7 +66,7 @@ var capitalCoordinate = {
     "Poland" : new google.maps.LatLng(52.23, 21.02),
     "Spain"  : new google.maps.LatLng(40.40, -3.72),
     "Turkey" : new google.maps.LatLng(41.01, 28.98),
-    "Denmark": new google.maps.LatLng(55.68, 12.57),
+    "Denmark": new google.maps.LatLng(55.68, 12.57)
 };
 
 var electionData = [
