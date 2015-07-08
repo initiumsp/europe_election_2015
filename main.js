@@ -1,8 +1,7 @@
-/*global google */
+/*global google, electionData */
 
 var map;
 var infoWindows = [];
-var layers = [];
 var i = 0;
 var lastInfoWindow = null;
 
@@ -71,7 +70,7 @@ var capitalCoordinate = {
 
 
 
-function get_infoWindow_string (country) {
+function _getInfoWindowString (country) {
     'use strict';
     var result = '';
 
@@ -99,58 +98,64 @@ function get_infoWindow_string (country) {
     return result;
 }
 
-function show_infoWindow (country) {
+function drawBoundary(data, targetMap) {
     'use strict';
-    return function () {
-        if (lastInfoWindow !== null) {
-            lastInfoWindow.close();
-        }
-        for (var rank = 0; rank < countryList.length; rank++) {
-            if (countryList[rank] === country) {
-                break;
-            }
-        }
-        infoWindows[rank].open(map, layers[rank]);
-        lastInfoWindow = infoWindows[rank];
-    };
+    for (i=0;i<data.length;i++) {
+        var entry = data[i];
+        entry.mapLayer = new google.maps.Data();
+        entry.mapLayer.loadGeoJson(entry.boundaryGeojsonPath);
+        entry.mapLayer.setMap(targetMap);
+    }
 }
 
-function drawBoundary()
+function styleMap(data, targetMap) {
+    'use strict';
+    // Fill in the real style settings
+    for (i=0;i<data.length;i++) {
+        var entry = data[i];
+        entry.mapLayer.setStyle({
+            strokeColor: 'black',
+            fillColor: 'black'
+        });
+    }
+}
+
+function setInfoWindow(data, targetMap) {
+    'use strict';
+    for (i=0;i<data.length;i++) {
+        var entry = data[i];
+        var contentString = _getInfoWindowString(entry.area);
+        var infoWindowPosition = new google.maps.LatLng(entry.infoWindowAnchor[0],
+                                                        entry.infoWindowAnchor[1]);
+        entry.infoWindow = new google.maps.InfoWindow({
+            content: contentString,
+            position: infoWindowPosition
+        });
+
+        google.maps.event.addListener(entry.mapLayer, 'click', function(entry){
+            return function() {
+                if (lastInfoWindow !== null) {
+                    lastInfoWindow.close();
+                }
+                entry.infoWindow.open(targetMap, entry.mapLayer);
+                lastInfoWindow = entry.infoWindow;
+            };
+        }(entry));
+    }
+}
 
 function initialize() {
     'use strict';
     map = new google.maps.Map(document.getElementById('map-canvas'), {
         zoom: initial_zoom,
         center: {lat: initial_lat,
-                 lng: initial_lng}
+                 lng: initial_lng},
+        mapTypeId: google.maps.MapTypeId.HYBRID
     });
 
-    //Add legend
-    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(
-        document.getElementById('legend'));
+    drawBoundary(electionData, map);
+    styleMap(electionData, map);
+    setInfoWindow(electionData, map);
 
-    for (i=0;i<countryList.length;i++) {
-        var country = countryList[i];
-        var wing = baseColorData[country];
-        var color = wingColorCoding[wing];
-
-        layers[i] = new google.maps.Data();
-        layers[i].loadGeoJson('./json/'+country+'.json');
-        layers[i].setStyle({
-            strokeColor: color,
-            fillColor: color
-        });
-
-        var contentString = get_infoWindow_string(country);
-        var infoWindowPosition = capitalCoordinate[country];
-        infoWindows[i] = new google.maps.InfoWindow({
-            content: contentString,
-            position: infoWindowPosition
-        });
-
-        google.maps.event.addListener(layers[i], 'click', show_infoWindow(country));
-
-        layers[i].setMap(map);
-    }
 }
 google.maps.event.addDomListener(window, 'load', initialize);
